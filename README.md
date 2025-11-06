@@ -353,12 +353,19 @@ Pour ma part j'ai des capteurs de températures et humidité zigbee
 
 Symptôme	Cause possible	Solution
 ❌ Not connected [AsyncModbusTcpClient]	Mauvais port ou IP	Vérifier IP statique et port 502 
+
 ⚠️ No response after 3 retries	Câblage RS485 inversé	Inverser A/B et vérifier les jumpers JP1/JP4 ou Ou la configuration du wareshare notament Baud rate, parity et Stopbits
+
 💾 Data incohérente	Parité incorrecte	Utiliser Even et 2 stop bits
+
 ⏳ Pas de lecture	Adresse Modbus incorrecte	Vérifier la table officielle fournie
+
 🔌 Alim instable	Mauvais PoE ou câble RJ45	Vérifier la tension du port PoE
+
 🚫 Interface injoignable (192.168.1.200)	Conflit d’IP ou reset non appliqué	Redémarrer le Waveshare et la Freebox
+
 🔄 Connexion aléatoire	Timeout trop court	Passer timeout: 10 et delay: 3 dans configuration.yaml
+
 🧱 Blocage total	Modbus figé après coupure	Redémarrer la VMC + Waveshare (PoE OFF/ON 10s)
 
  ## Schéma de câblage
