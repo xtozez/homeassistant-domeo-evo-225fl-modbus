@@ -46,7 +46,7 @@ Cette configuration permet la lecture des données de température, humidité, d
 
 La table complète des registres est fournie dans le document :
 
-📘 **[Télécharger la table Modbus officielle (PDF)](./TABLE_MODBUS_DOMEO_EVO_FR.pdf)** 
+📘 **[Télécharger la table Modbus officielle (PDF)](./TABLE%20MODBUS%20DOMEO%20EVO_fr.pdf)** 
 *(S&P France – Version officielle)*
 
 ---
