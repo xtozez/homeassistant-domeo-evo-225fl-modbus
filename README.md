@@ -278,74 +278,75 @@ Pour ma part j'ai des capteurs de températures et humidité zigbee
 # VMC - Gestion automatique humidité SDB & SDE
 # ═════════════════════════════════════════════════════════════════════════════
 
-description: Active le boost VMC si humidité > 70 %, désactive si < 60 %
-trigger:
-  - platform: numeric_state
-    entity_id: sensor.capteur_h_et_t_sde_master_humidite
-    above: 70
-    id: boost_rdc
-  - platform: numeric_state
-    entity_id: sensor.capteur_h_et_t_sde_master_humidite
-    below: 60
-    id: stop_rdc
-  - platform: numeric_state
-    entity_id: sensor.capteur_h_et_t_sde_rdj_humidite
-    above: 70
-    id: boost_rdj
-  - platform: numeric_state
-    entity_id: sensor.capteur_h_et_t_sde_rdj_humidite
-    below: 60
-    id: stop_rdj
+- alias: VMC - Gestion automatique humidité SDB & SDE
+  description: Active le boost VMC si humidité > 70 %, désactive si < 60 %
+  trigger:
+    - platform: numeric_state
+      entity_id: sensor.capteur_h_et_t_sde_master_humidite
+      above: 70
+      id: boost_rdc
+    - platform: numeric_state
+      entity_id: sensor.capteur_h_et_t_sde_master_humidite
+      below: 60
+      id: stop_rdc
+    - platform: numeric_state
+      entity_id: sensor.capteur_h_et_t_sde_rdj_humidite
+      above: 70
+      id: boost_rdj
+    - platform: numeric_state
+      entity_id: sensor.capteur_h_et_t_sde_rdj_humidite
+      below: 60
+      id: stop_rdj
 
-condition: []
+  condition: []
 
-action:
-  - choose:
-      # --- Salle de bain RDC (Master) ---
-      - conditions:
-          - condition: trigger
-            id: boost_rdc
-        sequence:
-          - service: modbus.write_register
-            data:
-              hub: domeo225
-              address: 2
-              slave: 1
-              value: 3   # Boost
-      - conditions:
-          - condition: trigger
-            id: stop_rdc
-        sequence:
-          - service: modbus.write_register
-            data:
-              hub: domeo225
-              address: 2
-              slave: 1
-              value: 1   # Normal
+  action:
+    - choose:
+        # --- Salle de bain RDC (Master) ---
+        - conditions:
+            - condition: trigger
+              id: boost_rdc
+          sequence:
+            - service: modbus.write_register
+              data:
+                hub: domeo225
+                address: 2
+                slave: 1
+                value: 3   # Boost
+        - conditions:
+            - condition: trigger
+              id: stop_rdc
+          sequence:
+            - service: modbus.write_register
+              data:
+                hub: domeo225
+                address: 2
+                slave: 1
+                value: 1   # Normal
 
-      # --- Salle d’eau RDJ ---
-      - conditions:
-          - condition: trigger
-            id: boost_rdj
-        sequence:
-          - service: modbus.write_register
-            data:
-              hub: domeo225
-              address: 2
-              slave: 1
-              value: 3
-      - conditions:
-          - condition: trigger
-            id: stop_rdj
-        sequence:
-          - service: modbus.write_register
-            data:
-              hub: domeo225
-              address: 2
-              slave: 1
-              value: 1
+        # --- Salle d’eau RDJ ---
+        - conditions:
+            - condition: trigger
+              id: boost_rdj
+          sequence:
+            - service: modbus.write_register
+              data:
+                hub: domeo225
+                address: 2
+                slave: 1
+                value: 3
+        - conditions:
+            - condition: trigger
+              id: stop_rdj
+          sequence:
+            - service: modbus.write_register
+              data:
+                hub: domeo225
+                address: 2
+                slave: 1
+                value: 1
 
-mode: single
+  mode: single
 ```
 
 ## 🧰 Dépannage
